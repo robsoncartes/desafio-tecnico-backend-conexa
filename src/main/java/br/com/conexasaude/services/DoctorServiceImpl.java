@@ -2,6 +2,7 @@ package br.com.conexasaude.services;
 
 import br.com.conexasaude.models.Doctor;
 import br.com.conexasaude.repositories.DoctorRepository;
+import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -60,7 +61,7 @@ public class DoctorServiceImpl implements DoctorService {
 
             return doctorRepository.save(doctor);
         } else {
-            throw new DataIntegrityViolationException("Email já existe.");
+            throw new DataIntegrityException("Email já existe.");
         }
     }
 }
