@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
@@ -36,6 +38,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public List<Doctor> getAll() {
+
+        return doctorRepository.findAll();
+    }
+
+    @Override
     public Doctor save(Doctor doctor) {
 
         Doctor obj = doctorRepository.findByEmail(doctor.getEmail());
@@ -48,7 +56,7 @@ public class DoctorServiceImpl implements DoctorService {
             doctor.setExpertise(doctor.getExpertise());
             doctor.setCpf(doctor.getCpf());
             doctor.setAge(doctor.getAge());
-            doctor.setPhone(doctor.getPhone());
+            doctor.setPhoneNumber(doctor.getPhoneNumber());
 
             return doctorRepository.save(doctor);
         } else {

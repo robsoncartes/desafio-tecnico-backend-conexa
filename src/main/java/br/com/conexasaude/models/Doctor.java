@@ -24,5 +24,5 @@ public class Doctor {
     private String expertise;
     private String cpf;
     private String age;
-    private String phone;
+    private String phoneNumber;
 }
