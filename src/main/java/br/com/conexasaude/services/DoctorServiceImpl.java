@@ -5,7 +5,6 @@ import br.com.conexasaude.repositories.DoctorRepository;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
