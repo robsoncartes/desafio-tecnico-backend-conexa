@@ -17,6 +17,7 @@ public class Login implements UserDetails {
     @Getter
     private Long id;
 
+    @Getter
     private String email;
     private String password;
 

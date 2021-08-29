@@ -1,6 +1,7 @@
-package br.com.conexasaude.services;
+package br.com.conexasaude.services.impl;
 
 import br.com.conexasaude.models.Doctor;
+import br.com.conexasaude.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

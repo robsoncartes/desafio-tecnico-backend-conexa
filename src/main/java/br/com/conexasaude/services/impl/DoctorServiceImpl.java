@@ -1,12 +1,18 @@
-package br.com.conexasaude.services;
+package br.com.conexasaude.services.impl;
 
 import br.com.conexasaude.models.Doctor;
+import br.com.conexasaude.models.enums.AuthorityName;
 import br.com.conexasaude.repositories.DoctorRepository;
+import br.com.conexasaude.security.Login;
+import br.com.conexasaude.services.DoctorService;
+import br.com.conexasaude.services.exceptions.AuthorizationException;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -14,6 +20,15 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private LoginServiceImpl loginService;
+
+    @Autowired
+    private HttpServletRequest servletRequest;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Doctor getById(Long id) {
@@ -28,6 +43,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor getByEmail(String email) {
+
+        Login login = loginService.getAuthenticated();
+
+        if (login == null || !login.hasRole(AuthorityName.DOCTOR) && !email.equals(login.getEmail()))
+            throw new AuthorizationException("Acesso negado.");
 
         Doctor doctor = doctorRepository.findByEmail(email);
 
@@ -51,7 +71,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (obj == null) {
             doctor.setId(null);
             doctor.setEmail(doctor.getEmail());
-            doctor.setPassword(doctor.getPassword());
+            doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
             doctor.setPasswordConfirmation(doctor.getPasswordConfirmation());
             doctor.setExpertise(doctor.getExpertise());
             doctor.setCpf(doctor.getCpf());
