@@ -47,7 +47,7 @@ public class PatientServiceImpl implements PatientService {
             patient.setId(null);
             patient.setName(patient.getName());
             patient.setCpf(patient.getCpf());
-            patient.setIdade(patient.getIdade());
+            patient.setAge(patient.getAge());
             patient.setEmail(patient.getEmail());
 
             return patientRepository.save(patient);

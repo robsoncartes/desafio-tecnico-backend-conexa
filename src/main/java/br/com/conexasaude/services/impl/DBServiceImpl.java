@@ -37,16 +37,5 @@ public class DBServiceImpl {
 
         for (Patient patient : patients)
             patientService.save(patient);
-
-        Patient p1 = patientService.getById(1L);
-        System.err.println(p1.toString());
-
-        Patient p2 = patientService.getByEmail("patient2@email.com");
-        System.err.println(p2.toString());
-
-        List<Patient> finded = patientService.getAll();
-
-        for (Patient patient: finded)
-            System.err.println(patient.toString());
     }
 }

@@ -45,7 +45,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String[] PUBLIC_MATCHERS_POST = {
             "/login/**",
-            "/signup/**"
+            "/signup/**",
+            "/patients/"
     };
 
     @Override

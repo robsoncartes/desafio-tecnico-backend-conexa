@@ -32,7 +32,7 @@ public class Patient {
     private String cpf;
 
     @JsonView({PatientView.PatientComplete.class})
-    private String idade;
+    private String age;
 
     @JsonView({PatientView.PatientComplete.class})
     private String email;
@@ -56,7 +56,7 @@ public class Patient {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", idade='" + idade + '\'' +
+                ", idade='" + age + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
