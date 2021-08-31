@@ -22,16 +22,16 @@ public class DBServiceImpl {
 
     public void instantiateTestDatabase() {
 
-        Doctor doctor1 = new Doctor(null, "medico1@email.com", "pass", "pass", "Cardiologista", "101.202.303-11", "33", "(21) 3232-6565");
-        Doctor doctor2 = new Doctor(null, "medico2@email.com", "pass", "pass", "Psiquiatra", "102.202.303-11", "45", "(12) 9000-9111");
+        Doctor doctor1 = new Doctor(null, "medico1@email.com", "pass", "pass", "Cardiologista", "782.743.770-28", "33", "(21) 3232-6565");
+        Doctor doctor2 = new Doctor(null, "medico2@email.com", "pass", "pass", "Psiquiatra", "435.329.460-17", "45", "(12) 9000-9111");
 
         List<Doctor> doctors = new ArrayList<>(Arrays.asList(doctor1, doctor2));
 
         for (Doctor doctor : doctors)
             doctorService.save(doctor);
 
-        Patient patient1 = new Patient(null, "Patient1", "465.906.890-08", "42", "patient1@email.com");
-        Patient patient2 = new Patient(null, "Patient2", "108.436.910-93", "31", "patient2@email.com");
+        Patient patient1 = new Patient(null, "Patient1", "744.197.940-46", "42", "patient1@email.com");
+        Patient patient2 = new Patient(null, "Patient2", "602.327.740-30", "31", "patient2@email.com");
 
         List<Patient> patients = new ArrayList<>(Arrays.asList(patient1, patient2));
 

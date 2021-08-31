@@ -66,21 +66,27 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Doctor save(Doctor doctor) {
 
-        Doctor obj = doctorRepository.findByEmail(doctor.getEmail());
+        if (doctor.getPassword().equals(doctor.getPasswordConfirmation())){
 
-        if (obj == null) {
-            doctor.setId(null);
-            doctor.setEmail(doctor.getEmail());
-            doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-            doctor.setPasswordConfirmation(doctor.getPasswordConfirmation());
-            doctor.setExpertise(doctor.getExpertise());
-            doctor.setCpf(doctor.getCpf());
-            doctor.setAge(doctor.getAge());
-            doctor.setPhoneNumber(doctor.getPhoneNumber());
+            Doctor obj = doctorRepository.findByEmailOrCpf(doctor.getEmail(), doctor.getCpf());
 
-            return doctorRepository.save(doctor);
-        } else {
-            throw new DataIntegrityException("Email já existe.");
+            if (obj == null) {
+                doctor.setId(null);
+                doctor.setEmail(doctor.getEmail());
+                doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+                doctor.setPasswordConfirmation(doctor.getPasswordConfirmation());
+                doctor.setExpertise(doctor.getExpertise());
+                doctor.setCpf(doctor.getCpf());
+                doctor.setAge(doctor.getAge());
+                doctor.setPhoneNumber(doctor.getPhoneNumber());
+                return doctorRepository.save(doctor);
+            }else {
+                throw new DataIntegrityException("Email ou CPF já existe.");
+            }
+        }
+
+        else {
+            throw new DataIntegrityException("Password e PasswordConfirmation devem ser iguais.");
         }
     }
 }
