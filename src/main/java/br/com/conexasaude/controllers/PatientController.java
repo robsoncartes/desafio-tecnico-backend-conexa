@@ -44,6 +44,7 @@ public class PatientController {
 
     @PreAuthorize("hasRole('DOCTOR')")
     @PostMapping(value = "/patients")
+    @JsonView(PatientView.PatientComplete.class)
     public ResponseEntity<Void> save(@Valid @RequestBody Patient patient){
 
         Patient obj = patientService.save(patient);

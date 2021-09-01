@@ -41,7 +41,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient save(Patient patient) {
 
-        Patient obj = patientRepository.findByEmail(patient.getEmail());
+        Patient obj = patientRepository.findByCpfOrEmail(patient.getCpf(), patient.getEmail());
 
         if (obj == null) {
             patient.setId(null);
@@ -52,9 +52,10 @@ public class PatientServiceImpl implements PatientService {
 
             return patientRepository.save(patient);
         } else {
-            throw new DataIntegrityException("Já existe um paciente com esse email.");
+            throw new DataIntegrityException("CPF ou Email já existe.");
         }
     }
+
 
     @Override
     public List<Patient> getAll() {

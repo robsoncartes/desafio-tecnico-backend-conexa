@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     Patient findByEmail(String email);
+
+    Patient findByCpf(String cpf);
+
+    Patient findByCpfOrEmail(String cpf, String email);
 }
