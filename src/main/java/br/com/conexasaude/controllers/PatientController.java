@@ -1,7 +1,6 @@
 package br.com.conexasaude.controllers;
 
 import br.com.conexasaude.models.Patient;
-import br.com.conexasaude.models.views.DoctorView;
 import br.com.conexasaude.models.views.PatientView;
 import br.com.conexasaude.services.PatientService;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -45,12 +44,23 @@ public class PatientController {
     @PreAuthorize("hasRole('DOCTOR')")
     @PostMapping(value = "/patients")
     @JsonView(PatientView.PatientComplete.class)
-    public ResponseEntity<Void> save(@Valid @RequestBody Patient patient){
+    public ResponseEntity<Void> save(@Valid @RequestBody Patient patient) {
 
         Patient obj = patientService.save(patient);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @PreAuthorize("hasRole('DOCTOR')")
+    @PutMapping(value = "/patients/{id}")
+    @JsonView(PatientView.PatientUpdate.class)
+    public ResponseEntity<Void> update(@Valid @RequestBody Patient patient, @PathVariable Long id) {
+
+        patient.setId(id);
+        patientService.update(patient);
+
+        return ResponseEntity.noContent().build();
     }
 }

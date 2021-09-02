@@ -12,5 +12,9 @@ public interface PatientService {
 
     Patient save(Patient patient);
 
+    Patient update(Patient patient);
+
+    void updateData(Patient newPatient, Patient patient);
+
     List<Patient> getAll();
 }

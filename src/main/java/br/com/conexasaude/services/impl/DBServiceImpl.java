@@ -30,8 +30,8 @@ public class DBServiceImpl {
         for (Doctor doctor : doctors)
             doctorService.save(doctor);
 
-        Patient patient1 = new Patient(null, "Patient1", "744.197.940-46", "42", "patient1@email.com");
-        Patient patient2 = new Patient(null, "Patient2", "602.327.740-30", "31", "patient2@email.com");
+        Patient patient1 = new Patient(null, "Patient1", "744.197.940-46", "42", "patient1@email.com", "(21) 3232-6565");
+        Patient patient2 = new Patient(null, "Patient2", "602.327.740-30", "31", "patient2@email.com", "(12) 9000-9111");
 
         List<Patient> patients = new ArrayList<>(Arrays.asList(patient1, patient2));
 

@@ -6,6 +6,10 @@ public class PatientView {
 
     }
 
+    public static class PatientUpdate extends PatientSimple {
+
+    }
+
     public static class PatientComplete extends PatientSimple {
 
     }
