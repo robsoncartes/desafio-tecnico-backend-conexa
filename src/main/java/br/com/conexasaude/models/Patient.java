@@ -46,6 +46,7 @@ public class Patient {
     @JsonView({PatientView.PatientComplete.class})
     @NotEmpty(message = "Preenchimento obrigatório.")
     @Email(message = "Email inválido.")
+    @Column(unique = true)
     private String email;
 
     @Override

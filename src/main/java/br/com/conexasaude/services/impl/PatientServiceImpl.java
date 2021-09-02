@@ -51,14 +51,21 @@ public class PatientServiceImpl implements PatientService {
             patient.setEmail(patient.getEmail());
 
             return patientRepository.save(patient);
-        } else {
-            throw new DataIntegrityException("CPF ou Email já existe.");
         }
-    }
 
+        if (patient.getCpf().equals(obj.getCpf()) && patient.getEmail().equals(obj.getEmail()))
+            throw new DataIntegrityException("Já existe um cadastro com o CPF e Email informados.");
+
+        if (patient.getCpf().equals(obj.getCpf()))
+            throw new DataIntegrityException("Já existe um cadastro com o CPF informado.");
+        else
+            throw new DataIntegrityException("Já existe um cadastro com o Email informado.");
+    }
 
     @Override
     public List<Patient> getAll() {
+
         return patientRepository.findAll();
     }
+
 }
