@@ -5,7 +5,6 @@ import br.com.conexasaude.repositories.PatientRepository;
 import br.com.conexasaude.services.PatientService;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerMapping;

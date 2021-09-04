@@ -14,7 +14,7 @@ public class TestConfig {
     private DBServiceImpl dbService;
 
     @Bean
-    public boolean instantiateDatabase() {
+    public boolean instantiateDatabase() throws Exception {
 
         dbService.instantiateTestDatabase();
 

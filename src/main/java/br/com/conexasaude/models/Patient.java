@@ -1,10 +1,9 @@
 package br.com.conexasaude.models;
 
 import br.com.conexasaude.models.views.PatientView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -12,13 +11,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "patients")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Patient {
@@ -54,6 +53,22 @@ public class Patient {
     @NotEmpty(message = "Preenchimento obrigatório")
     private String phoneNumber;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "patientId")
+    private List<Attendance> attendance = new ArrayList<>();
+
+    public Patient() {
+    }
+
+    public Patient(Long id, String name, String cpf, String age, String email, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.age = age;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,12 +84,12 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", idade='" + age + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+
+        return "Id: " + getId()
+                + "\tNome: " + getName()
+                + "\tCPF: " + getCpf()
+                + "\tIdade: " + getAge()
+                + "\tEmail: " + getEmail()
+                + "\tTelefone: " + getPhoneNumber();
     }
 }
