@@ -3,15 +3,14 @@ package br.com.conexasaude.models;
 import br.com.conexasaude.models.enums.AuthorityName;
 import br.com.conexasaude.models.views.DoctorView;
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +20,7 @@ import java.util.stream.Collectors;
 @Table(name = "doctors")
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Doctor {
 
     @Id
@@ -30,7 +30,7 @@ public class Doctor {
 
     @JsonView(DoctorView.DoctorLogin.class)
     @NotEmpty(message = "Preenchimento obrigatório.")
-    @Email(message = "Email inválido.")
+    @Email(message = "Não é um e-mail bem formado.")
     private String email;
 
     @NotEmpty(message = "Preenchimento obrigatório.")
@@ -48,7 +48,7 @@ public class Doctor {
     private String expertise;
 
     @JsonView(DoctorView.DoctorComplete.class)
-    @CPF(message = "CPF deve ser único.")
+    @CPF(message = "Número de CPF inválido.")
     @NotEmpty(message = "Preenchimento obrigatório.")
     @Column(unique = true)
     private String cpf;
@@ -91,5 +91,18 @@ public class Doctor {
     public Set<AuthorityName> getAuthorityNames() {
 
         return this.authorities.stream().map(AuthorityName::toEnum).collect(Collectors.toSet());
+    }
+
+
+    @Override
+    public String toString() {
+
+        return "Doctor: {"
+                + "id: " + getId()
+                + "\tEmail: " + email
+                + "\tExpertise: " + expertise
+                + "\tCPF: " + cpf
+                + "\tAge: " + age
+                + "\tPhoneNumber: " + phoneNumber + "}";
     }
 }
