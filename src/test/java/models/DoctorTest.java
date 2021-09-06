@@ -60,11 +60,11 @@ public class DoctorTest extends TestUtil {
 
         doctor.setPassword("123");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo password deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Senha deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
 
         doctor.setPassword("1234567890123456789012345678901234567890123456789012345678901");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo password deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Senha deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
     }
 
     @Test
@@ -78,11 +78,11 @@ public class DoctorTest extends TestUtil {
 
         doctor.setPasswordConfirmation("123");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo passwordConfirmation deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Confirmação Senha deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
 
         doctor.setPasswordConfirmation("1234567890123456789012345678901234567890123456789012345678901");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo passwordConfirmation deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Confirmação Senha deve conter entre 4 e 60 caracteres.", getErrorMessage(doctor));
     }
 
     @Test
@@ -96,11 +96,11 @@ public class DoctorTest extends TestUtil {
 
         doctor.setExpertise("123");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo expertise deve conter entre 4 e 50 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Especialidade deve conter entre 4 e 50 caracteres.", getErrorMessage(doctor));
 
         doctor.setExpertise("123456789012345678901234567890123456789012345678901");
         assertEquals(1, getErrorSize(doctor));
-        assertEquals("O tamanho do campo expertise deve conter entre 4 e 50 caracteres.", getErrorMessage(doctor));
+        assertEquals("O tamanho do campo Especialidade deve conter entre 4 e 50 caracteres.", getErrorMessage(doctor));
     }
 
     @Test

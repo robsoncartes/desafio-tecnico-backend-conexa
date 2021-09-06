@@ -34,17 +34,17 @@ public class Doctor {
     private String email;
 
     @NotEmpty(message = "Preenchimento obrigatório.")
-    @Size(min = 4, max = 60, message = "O tamanho do campo password deve conter entre 4 e 60 caracteres.")
+    @Size(min = 4, max = 60, message = "O tamanho do campo Senha deve conter entre 4 e 60 caracteres.")
     private String password;
 
     @Transient
     @NotEmpty(message = "Preenchimento obrigatório.")
-    @Size(min = 4, max = 60, message = "O tamanho do campo passwordConfirmation deve conter entre 4 e 60 caracteres.")
+    @Size(min = 4, max = 60, message = "O tamanho do campo Confirmação Senha deve conter entre 4 e 60 caracteres.")
     private String passwordConfirmation;
 
     @JsonView(DoctorView.DoctorComplete.class)
     @NotEmpty(message = "Preenchimento obrigatório.")
-    @Size(min = 4, max = 50, message = "O tamanho do campo expertise deve conter entre 4 e 50 caracteres.")
+    @Size(min = 4, max = 50, message = "O tamanho do campo Especialidade deve conter entre 4 e 50 caracteres.")
     private String expertise;
 
     @JsonView(DoctorView.DoctorComplete.class)
@@ -55,7 +55,7 @@ public class Doctor {
 
     @JsonView(DoctorView.DoctorComplete.class)
     @NotEmpty(message = "Preenchimento obrigatório.")
-    @Size(min = 1, max = 3, message = "O tamanho do campo age deve conter entre 1 e 3 caracteres.")
+    @Size(min = 1, max = 3, message = "O tamanho do campo Idade deve conter entre 1 e 3 caracteres.")
     private String age;
 
     @JsonView(DoctorView.DoctorComplete.class)
@@ -100,9 +100,9 @@ public class Doctor {
         return "Doctor: {"
                 + "id: " + getId()
                 + "\tEmail: " + email
-                + "\tExpertise: " + expertise
+                + "\tEspecialidade: " + expertise
                 + "\tCPF: " + cpf
-                + "\tAge: " + age
-                + "\tPhoneNumber: " + phoneNumber + "}";
+                + "\tIdade: " + age
+                + "\tTelefone: " + phoneNumber + "}";
     }
 }
