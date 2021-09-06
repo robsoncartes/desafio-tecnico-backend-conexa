@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -23,9 +22,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private LoginServiceImpl loginService;
-
-    @Autowired
-    private HttpServletRequest servletRequest;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -52,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorRepository.findByEmail(email);
 
         if (doctor == null)
-            throw new ObjectNotFoundException("Doutor não encontrado. E-mail: " + email + ", Tipo: " + Doctor.class.getName());
+            throw new ObjectNotFoundException("E-mail: " + email + " não encontrado. Tipo: " + Doctor.class.getName());
 
         return doctor;
     }
@@ -66,27 +62,40 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Doctor save(Doctor doctor) {
 
-        if (doctor.getPassword().equals(doctor.getPasswordConfirmation())){
+        if (!doctor.getPassword().equals(doctor.getPasswordConfirmation()))
+            throw new DataIntegrityException("Senha e Confirmação de senha não são iguais.");
 
-            Doctor obj = doctorRepository.findByEmailOrCpf(doctor.getEmail(), doctor.getCpf());
+        List<Doctor> doctors = doctorRepository.findByCpfOrEmail(doctor.getCpf(), doctor.getEmail());
 
-            if (obj == null) {
-                doctor.setId(null);
-                doctor.setEmail(doctor.getEmail());
-                doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-                doctor.setPasswordConfirmation(doctor.getPasswordConfirmation());
-                doctor.setExpertise(doctor.getExpertise());
-                doctor.setCpf(doctor.getCpf());
-                doctor.setAge(doctor.getAge());
-                doctor.setPhoneNumber(doctor.getPhoneNumber());
-                return doctorRepository.save(doctor);
-            }else {
-                throw new DataIntegrityException("Email ou CPF já existe.");
-            }
+        for (Doctor doc : doctors) {
+            System.err.println(doc.getCpf() + " " + doc.getEmail());
         }
 
-        else {
-            throw new DataIntegrityException("Password e PasswordConfirmation devem ser iguais.");
+        if (doctors.isEmpty()) {
+            doctor.setId(null);
+            doctor.setEmail(doctor.getEmail());
+            doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+            doctor.setPasswordConfirmation(doctor.getPasswordConfirmation());
+            doctor.setExpertise(doctor.getExpertise());
+            doctor.setCpf(doctor.getCpf());
+            doctor.setAge(doctor.getAge());
+            doctor.setPhoneNumber(doctor.getPhoneNumber());
+
+            return doctorRepository.save(doctor);
         }
+
+        if (doctors.size() == 2) {
+            throw new DataIntegrityException("CPF e E-mail já estão sendo utilizados.");
+        }
+
+        Doctor doc = doctors.get(0);
+
+        if (doctor.getCpf().equals(doc.getCpf()) && doctor.getEmail().equals(doc.getEmail()))
+            throw new DataIntegrityException("Já existe um cadastro com o CPF e E-mail informados.");
+
+        if (doctor.getCpf().equals(doc.getCpf()))
+            throw new DataIntegrityException("Já existe um cadastro com o CPF informado.");
+        else
+            throw new DataIntegrityException("Já existe um cadastro com o E-mail informado.");
     }
 }
