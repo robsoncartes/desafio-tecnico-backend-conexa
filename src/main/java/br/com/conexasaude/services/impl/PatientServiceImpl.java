@@ -6,6 +6,7 @@ import br.com.conexasaude.services.PatientService;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -106,6 +107,18 @@ public class PatientServiceImpl implements PatientService {
             throw new DataIntegrityException("CPF já existe");
         } else {
             throw new DataIntegrityException("SEI LA Já existe um cadastro com o Email informado.");
+        }
+    }
+
+    @Override
+    public void delete(Long id){
+
+        getById(id);
+
+        try {
+            patientRepository.deleteById(id);
+        }catch (DataIntegrityViolationException  e){
+            throw new DataIntegrityException("Não é possível excluir um Paciente com Agendamentos.");
         }
     }
 

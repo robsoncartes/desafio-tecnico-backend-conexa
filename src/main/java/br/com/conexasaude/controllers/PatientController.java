@@ -63,4 +63,14 @@ public class PatientController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PreAuthorize("hasRole('DOCTOR')")
+    @DeleteMapping(value = "/patients/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+
+        patientService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
