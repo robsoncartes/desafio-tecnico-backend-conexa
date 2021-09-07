@@ -74,6 +74,14 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
+    public void delete(Long id) {
+
+        getById(id);
+
+        attendanceRepository.deleteById(id);
+    }
+
+    @Override
     public List<Attendance> getAll() {
         return attendanceRepository.findAll();
     }

@@ -14,5 +14,7 @@ public interface AttendanceService {
 
     Attendance save(Attendance attendance);
 
+    void delete(Long id);
+
     List<Attendance> getAll();
 }
