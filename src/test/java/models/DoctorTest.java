@@ -13,7 +13,7 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 public class DoctorTest extends TestUtil {
 
     @Test
-    public void accountTestPojo() {
+    public void doctorTestPojo() {
 
         final Class<?> classUnderTest = Doctor.class;
 
