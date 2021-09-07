@@ -47,9 +47,12 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient save(Patient patient) {
 
-        Patient obj = patientRepository.findByCpfOrEmail(patient.getCpf(), patient.getEmail());
+        List<Patient> patients = patientRepository.findByCpfOrEmail(patient.getCpf(), patient.getEmail());
 
-        if (obj == null) {
+        for (Patient pat : patients)
+            System.err.println(pat.getCpf() + " " + pat.getEmail());
+
+        if (patients.isEmpty()) {
             patient.setId(null);
             patient.setName(patient.getName());
             patient.setCpf(patient.getCpf());
@@ -60,13 +63,20 @@ public class PatientServiceImpl implements PatientService {
             return patientRepository.save(patient);
         }
 
-        if (patient.getCpf().equals(obj.getCpf()) && patient.getEmail().equals(obj.getEmail()))
-            throw new DataIntegrityException("Já existe um cadastro com o CPF e Email informados.");
+        if (patients.size() == 2) {
+            throw new DataIntegrityException("CPF e  E-mail já estão sendo utilizados.");
+        }
 
-        if (patient.getCpf().equals(obj.getCpf()))
-            throw new DataIntegrityException("Já existe um cadastro com o CPF informado.");
+        Patient pat = patients.get(0);
+
+        if (patient.getCpf().equals(pat.getCpf()) && patient.getEmail().equals(pat.getEmail()))
+            throw new DataIntegrityException("Já existe um Paciente com o CPF e E-mail informados.");
+
+        if (patient.getCpf().equals(pat.getCpf()))
+            throw new DataIntegrityException("Já existe um Paciente com o CFP informado.");
+
         else
-            throw new DataIntegrityException("Já existe um cadastro com o Email informado.");
+            throw new DataIntegrityException("Já existe um Paciente com o E-mail informado.");
     }
 
     @Override
