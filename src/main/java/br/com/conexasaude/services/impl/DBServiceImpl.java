@@ -28,17 +28,17 @@ public class DBServiceImpl {
 
     public void instantiateTestDatabase() throws Exception {
 
-        Doctor doctor1 = new Doctor(null, "medico1@email.com", "pass", "pass", "Cardiologista", "782.743.770-28", "33", "(21) 3232-6565");
-        Doctor doctor2 = new Doctor(null, "medico2@email.com", "pass", "pass", "Psiquiatra", "435.329.460-17", "45", "(12) 9000-9111");
+        Doctor doctor1 = new Doctor(null, "medico1@email.com", "pass", "pass", "Cardiologista", "782.743.770-28", "33", "(21) 1111-1111");
+        Doctor doctor2 = new Doctor(null, "medico2@email.com", "pass", "pass", "Psiquiatra", "435.329.460-17", "45", "(21) 1111-2222");
 
         List<Doctor> doctors = new ArrayList<>(Arrays.asList(doctor1, doctor2));
 
         for (Doctor doctor : doctors)
             doctorService.save(doctor);
 
-        Patient patient1 = new Patient(null, "Patient1", "744.197.940-46", "42", "patient1@email.com", "(21) 3232-6565");
-        Patient patient2 = new Patient(null, "Patient2", "602.327.740-30", "31", "patient2@email.com", "(12) 9000-9111");
-        Patient patient3 = new Patient(null, "Patient3", "686.309.940-37", "31", "patient3@email.com", "(12) 9000-9111");
+        Patient patient1 = new Patient(null, "Patient1", "744.197.940-46", "42", "patient1@email.com", "(12) 2222-1111");
+        Patient patient2 = new Patient(null, "Patient2", "602.327.740-30", "31", "patient2@email.com", "(12) 2222-2222");
+        Patient patient3 = new Patient(null, "Patient3", "686.309.940-37", "31", "patient3@email.com", "(12) 2222-3333");
 
         List<Patient> patients = new ArrayList<>(Arrays.asList(patient1, patient2, patient3));
 
