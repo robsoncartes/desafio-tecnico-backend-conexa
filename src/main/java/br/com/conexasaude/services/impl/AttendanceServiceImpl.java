@@ -1,10 +1,16 @@
 package br.com.conexasaude.services.impl;
 
 import br.com.conexasaude.models.Attendance;
+import br.com.conexasaude.models.Doctor;
 import br.com.conexasaude.models.Patient;
+import br.com.conexasaude.models.enums.AuthorityName;
 import br.com.conexasaude.repositories.AttendanceRepository;
+import br.com.conexasaude.repositories.DoctorRepository;
 import br.com.conexasaude.repositories.PatientRepository;
+import br.com.conexasaude.security.Login;
 import br.com.conexasaude.services.AttendanceService;
+import br.com.conexasaude.services.LoginService;
+import br.com.conexasaude.services.exceptions.AuthorizationException;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private LoginService loginService;
+
     @Override
     public Attendance getById(Long id) {
 
@@ -30,6 +42,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         if (attendance == null)
             throw new ObjectNotFoundException("Atendimento não encontrado. Id: " + Attendance.class.getName());
+
+        Login login = loginService.getAuthenticated();
+
+        if ((login == null || !login.hasRole(AuthorityName.DOCTOR)) && !attendance.getDoctorId().equals(login.getId()))
+            throw new AuthorizationException("Acesso negado. Somente o Médico que criou o atendimento pode visualizá-lo.");
 
         return attendance;
     }
@@ -59,15 +76,29 @@ public class AttendanceServiceImpl implements AttendanceService {
     public Attendance save(Attendance attendance) {
 
         Patient patient = patientRepository.findById(attendance.getPatientId()).orElse(null);
+        Doctor doctor = doctorRepository.findById(attendance.getDoctorId()).orElse(null);
+
+        if (patient == null && doctor == null){
+            throw new DataIntegrityException("Não é possível criar uma atendimento porque o Médico com Id: "
+                    + attendance.getDoctorId() + " e o Paciente com Id: " + attendance.getPatientId()
+                    + " não existem. " + Attendance.class.getName());
+        }
 
         if (patient == null) {
             throw new DataIntegrityException("Não é possível criar um atendimento porque o Paciente com Id: "
                     + attendance.getPatientId() + " naõ existe. " + Attendance.class.getName());
+        }
+
+        if (doctor == null) {
+            throw new DataIntegrityException("Não é possível criar um atendimento porque o Médico com Id: "
+                    + attendance.getDoctorId() + " não existe. " + Attendance.class.getName());
         } else {
-            System.err.println("Atendimento Id: " + attendance.getId() + "\tPaciente: " + patient);
             attendance.setId(null);
             attendance.setInstant(new Date());
             attendance.setPatientId(attendance.getPatientId());
+
+            System.err.println("Atendimento Id: " + attendance.getId() + "\tPaciente: " + patient);
+            System.err.println(attendance);
 
             return attendanceRepository.save(attendance);
         }

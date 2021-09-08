@@ -47,25 +47,14 @@ public class DBServiceImpl {
 
         SimpleDateFormat sdf = new SimpleDateFormat();
 
-        Attendance att1 = new Attendance(null, sdf.parse("09/03/2021 10:00"), patient1.getId());
-        Attendance att2 = new Attendance(null, sdf.parse("09/13/2021 11:00"), patient1.getId());
-        Attendance att3 = new Attendance(null, sdf.parse("12/03/2021 12:00"), patient3.getId());
+        Attendance att1 = new Attendance(null, sdf.parse("09/03/2021 10:00"), patient1.getId(), doctor1.getId());
+        Attendance att2 = new Attendance(null, sdf.parse("09/13/2021 11:00"), patient1.getId(), doctor1.getId());
+        Attendance att3 = new Attendance(null, sdf.parse("12/03/2021 12:00"), patient3.getId(), doctor2.getId());
 
         List<Attendance> attendances = new ArrayList<>(Arrays.asList(att1, att2, att3));
 
         for (Attendance attendance: attendances){
             attendanceService.save(attendance);
         }
-
-
-        List<Attendance>  attendancesByPatient = attendanceService.getByPatient(patient1.getId());
-
-        for (Attendance attendance: attendancesByPatient)
-            System.err.println(attendance);
-
-        Attendance attendance = attendanceService.getByIdAndPatientId(att1.getId(), patient1.getId());
-        System.err.println(attendance);
-
-
     }
 }
