@@ -27,7 +27,7 @@ public class Attendance {
     @NotNull(message = "Data e hora do Atendimento não deve ser nulo.")
     private Date instant;
 
-    @NotNull(message = "Id do paciente não pode ser nulo.")
+    @NotNull(message = "Id do Paciente não pode ser nulo.")
     private Long patientId;
 
     @NotNull(message = "Id do Médico não pode ser nulo.")

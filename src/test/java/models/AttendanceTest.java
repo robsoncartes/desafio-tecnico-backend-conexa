@@ -37,7 +37,25 @@ public class AttendanceTest extends TestUtil {
         Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
         attendance.setPatientId(null);
         assertEquals(1, getErrorSize(attendance));
-        getErrorMessage(attendance);
+        assertEquals("Id do Paciente não pode ser nulo.", getErrorMessage(attendance));
+    }
+
+    @Test
+    public void attendanceShouldNotBeValidWithInvalidDoctorId() {
+
+        Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
+        attendance.setDoctorId(null);
+        assertEquals(1, getErrorSize(attendance));
+        assertEquals("Id do Médico não pode ser nulo.", getErrorMessage(attendance));
+    }
+
+    @Test
+    public void attendanceShouldNotBeValidWithInvalidDoctorIdAndInvalidPatientId() {
+
+        Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
+        attendance.setDoctorId(null);
+        attendance.setPatientId(null);
+        assertEquals(2, getErrorSize(attendance));
     }
 
     @Test
@@ -46,6 +64,6 @@ public class AttendanceTest extends TestUtil {
         Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
         attendance.setInstant(null);
         assertEquals(1, getErrorSize(attendance));
-        getErrorMessage(attendance);
+        assertEquals("Data e hora do Atendimento não deve ser nulo.", getErrorMessage(attendance));
     }
 }
