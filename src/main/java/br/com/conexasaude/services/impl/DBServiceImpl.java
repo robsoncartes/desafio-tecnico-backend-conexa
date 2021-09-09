@@ -4,6 +4,7 @@ import br.com.conexasaude.models.Attendance;
 import br.com.conexasaude.models.Doctor;
 import br.com.conexasaude.models.Patient;
 import br.com.conexasaude.services.AttendanceService;
+import br.com.conexasaude.services.DBService;
 import br.com.conexasaude.services.DoctorService;
 import br.com.conexasaude.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DBServiceImpl {
+public class DBServiceImpl implements DBService {
 
     @Autowired
     private DoctorService doctorService;
@@ -26,6 +27,7 @@ public class DBServiceImpl {
     @Autowired
     private AttendanceService attendanceService;
 
+    @Override
     public void instantiateTestDatabase() throws Exception {
 
         Doctor doctor1 = new Doctor(null, "medico1@email.com", "pass", "pass", "Cardiologista", "782.743.770-28", "33", "(21) 1111-1111");
@@ -53,7 +55,7 @@ public class DBServiceImpl {
 
         List<Attendance> attendances = new ArrayList<>(Arrays.asList(att1, att2, att3));
 
-        for (Attendance attendance: attendances){
+        for (Attendance attendance : attendances) {
             attendanceService.save(attendance);
         }
     }
