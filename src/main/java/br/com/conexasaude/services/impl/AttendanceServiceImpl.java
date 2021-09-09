@@ -41,7 +41,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Attendance attendance = attendanceRepository.findById(id).orElse(null);
 
         if (attendance == null)
-            throw new ObjectNotFoundException("Atendimento não encontrado. Id: " + Attendance.class.getName());
+            throw new ObjectNotFoundException("Atendimento não encontrado. Id: " + id + ", Tipo: " + Attendance.class.getName());
 
         Login login = loginService.getAuthenticated();
 
@@ -63,8 +63,8 @@ public class AttendanceServiceImpl implements AttendanceService {
         Attendance attendance = attendanceRepository.findByIdAndPatientId(id, patientId);
 
         if (attendance == null) {
-            throw new ObjectNotFoundException("Atendimento não encontrado. Id: " + id
-                    + ", Id Paciente: " + patientId + ", " + Attendance.class.getName());
+            throw new ObjectNotFoundException("Atendimento não encontrado. Id Atendimento: " + id
+                    + ", Id Paciente: " + patientId + ", Tipo: " + Attendance.class.getName());
         }
 
         return attendance;
