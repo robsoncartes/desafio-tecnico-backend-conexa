@@ -47,7 +47,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Login login = loginService.getAuthenticated();
 
         if (!login.hasRole(AuthorityName.DOCTOR) || !Objects.equals(attendance.getDoctorId(), login.getId()))
-            throw new AuthorizationException("Acesso negado. Somente o Médico que criou o atendimento pode visualizá-lo.");
+            throw new AuthorizationException("Acesso negado.");
 
         return attendance;
     }
