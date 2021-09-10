@@ -1,5 +1,6 @@
 package br.com.conexasaude.controllers.exceptions;
 
+import br.com.conexasaude.services.exceptions.AuthorizationException;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,13 @@ public class ControllerExceptionHandler {
             error.addError(x.getField(), x.getDefaultMessage());
 
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Proibido.", e.getMessage(), request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -45,7 +46,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         Login login = loginService.getAuthenticated();
 
-        if ((login == null || !login.hasRole(AuthorityName.DOCTOR)) && !attendance.getDoctorId().equals(login.getId()))
+        if (!login.hasRole(AuthorityName.DOCTOR) || !Objects.equals(attendance.getDoctorId(), login.getId()))
             throw new AuthorizationException("Acesso negado. Somente o Médico que criou o atendimento pode visualizá-lo.");
 
         return attendance;
@@ -78,7 +79,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Patient patient = patientRepository.findById(attendance.getPatientId()).orElse(null);
         Doctor doctor = doctorRepository.findById(attendance.getDoctorId()).orElse(null);
 
-        if (patient == null && doctor == null){
+        if (patient == null && doctor == null) {
             throw new DataIntegrityException("Não é possível criar uma atendimento porque o Médico com Id: "
                     + attendance.getDoctorId() + " e o Paciente com Id: " + attendance.getPatientId()
                     + " não existem. " + Attendance.class.getName());
@@ -116,5 +117,4 @@ public class AttendanceServiceImpl implements AttendanceService {
     public List<Attendance> getAll() {
         return attendanceRepository.findAll();
     }
-
 }
