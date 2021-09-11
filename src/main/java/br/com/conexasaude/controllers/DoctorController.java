@@ -7,6 +7,9 @@ import br.com.conexasaude.security.Login;
 import br.com.conexasaude.services.DoctorService;
 import br.com.conexasaude.services.LoginService;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +33,12 @@ public class DoctorController {
     @PreAuthorize("hasRole('DOCTOR')")
     @GetMapping(value = "/doctors/{id}")
     @JsonView(DoctorView.DoctorComplete.class)
+    @ApiOperation(value = "Obtenha um médico com base em seu ID", response = Doctor.class)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Médico recuperado com sucesso."),
+            @ApiResponse(code = 401, message = "Não autorizado."),
+            @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
+            @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")})
     public ResponseEntity<Doctor> findById(@PathVariable Long id) {
 
         Doctor doctor = doctorService.getById(id);
@@ -37,6 +46,15 @@ public class DoctorController {
         return ResponseEntity.ok().body(doctor);
     }
 
+    @ApiOperation(value = "Salvar um novo médico no banco de dados", response = Doctor.class)
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Recurso criado com sucesso. Médico salvo no banco de dados."),
+            @ApiResponse(code = 400, message = "Pedido ruim. O servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro."),
+            @ApiResponse(code = 401, message = "Não autorizado."),
+            @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
+            @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
+            @ApiResponse(code = 422, message = "Entidade não processável."),
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
+    })
     @PostMapping(value = "/signup")
     public ResponseEntity<Void> save(@Valid @RequestBody Doctor doctor) {
 
@@ -49,6 +67,14 @@ public class DoctorController {
 
     @PreAuthorize("hasRole('DOCTOR')")
     @PostMapping(value = "/logoff")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Recurso criado com sucesso. Médico salvo no banco de dados."),
+            @ApiResponse(code = 400, message = "Pedido ruim. O servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro."),
+            @ApiResponse(code = 401, message = "Não autorizado."),
+            @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
+            @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
+            @ApiResponse(code = 422, message = "Entidade não processável."),
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
+    })
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
 
         Login login = loginService.getAuthenticated();
@@ -63,6 +89,13 @@ public class DoctorController {
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping(value = "/doctors")
     @JsonView(DoctorView.DoctorComplete.class)
+    @ApiOperation(value = "Consultar todos os médicos armazenados no banco de dados.", response = Doctor.class)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Lista de médicos recuperada com sucesso."),
+            @ApiResponse(code = 401, message = "Não autorizado."),
+            @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
+            @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
+    })
     public ResponseEntity<List<Doctor>> findAll() {
 
         List<Doctor> doctors = doctorService.getAll();

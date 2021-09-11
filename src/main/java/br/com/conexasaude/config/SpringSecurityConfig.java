@@ -37,7 +37,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/h2-console/**"
+            "/h2-console/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/swagger-resources/**",
+            "/swagger.json",
+            "/webjars/**"
     };
 
     public static final String[] PUBLIC_MATCHERS_GET = {
@@ -47,7 +52,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String[] PUBLIC_MATCHERS_POST = {
             "/login/**",
             "/signup/**",
-            "/patients/"
     };
 
     @Override
@@ -57,6 +61,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             http.headers().frameOptions().disable();
 
         http.cors().and().csrf().disable();
+
+        /*
+        http.authorizeRequests()
+                .antMatchers(
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**" ,
+                        "/swagger.json")
+                .permitAll();
+
+         */
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
