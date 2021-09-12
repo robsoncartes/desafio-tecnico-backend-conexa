@@ -41,24 +41,6 @@ public class AttendanceTest extends TestUtil {
     }
 
     @Test
-    public void attendanceShouldNotBeValidWithInvalidDoctorId() {
-
-        Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
-        attendance.setDoctorId(null);
-        assertEquals(1, getErrorSize(attendance));
-        assertEquals("Id do Médico não pode ser nulo.", getErrorMessage(attendance));
-    }
-
-    @Test
-    public void attendanceShouldNotBeValidWithInvalidDoctorIdAndInvalidPatientId() {
-
-        Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
-        attendance.setDoctorId(null);
-        attendance.setPatientId(null);
-        assertEquals(2, getErrorSize(attendance));
-    }
-
-    @Test
     public void attendanceShouldNotBeValidWithInvalidInstant() {
 
         Attendance attendance = AttendanceFactory.validAttendance(new Attendance());
