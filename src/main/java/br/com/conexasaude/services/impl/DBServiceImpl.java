@@ -1,6 +1,5 @@
 package br.com.conexasaude.services.impl;
 
-import br.com.conexasaude.models.Attendance;
 import br.com.conexasaude.models.Doctor;
 import br.com.conexasaude.models.Patient;
 import br.com.conexasaude.services.AttendanceService;
@@ -10,7 +9,6 @@ import br.com.conexasaude.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,17 +44,5 @@ public class DBServiceImpl implements DBService {
 
         for (Patient patient : patients)
             patientService.save(patient);
-
-        SimpleDateFormat sdf = new SimpleDateFormat();
-
-        Attendance att1 = new Attendance(null, sdf.parse("09/03/2021 10:00"), patient1.getId(), doctor1.getId());
-        Attendance att2 = new Attendance(null, sdf.parse("09/13/2021 11:00"), patient1.getId(), doctor1.getId());
-        Attendance att3 = new Attendance(null, sdf.parse("12/03/2021 12:00"), patient3.getId(), doctor2.getId());
-
-        List<Attendance> attendances = new ArrayList<>(Arrays.asList(att1, att2, att3));
-
-        for (Attendance attendance : attendances) {
-            attendanceService.save(attendance);
-        }
     }
 }

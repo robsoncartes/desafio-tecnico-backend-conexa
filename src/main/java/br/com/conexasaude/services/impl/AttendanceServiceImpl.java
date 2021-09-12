@@ -1,7 +1,6 @@
 package br.com.conexasaude.services.impl;
 
 import br.com.conexasaude.models.Attendance;
-import br.com.conexasaude.models.Doctor;
 import br.com.conexasaude.models.Patient;
 import br.com.conexasaude.models.enums.AuthorityName;
 import br.com.conexasaude.repositories.AttendanceRepository;
@@ -14,10 +13,10 @@ import br.com.conexasaude.services.exceptions.AuthorizationException;
 import br.com.conexasaude.services.exceptions.DataIntegrityException;
 import br.com.conexasaude.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -77,25 +76,20 @@ public class AttendanceServiceImpl implements AttendanceService {
     public Attendance save(Attendance attendance) {
 
         Patient patient = patientRepository.findById(attendance.getPatientId()).orElse(null);
-        Doctor doctor = doctorRepository.findById(attendance.getDoctorId()).orElse(null);
-
-        if (patient == null && doctor == null) {
-            throw new DataIntegrityException("Não é possível criar uma atendimento porque o Médico com Id: "
-                    + attendance.getDoctorId() + " e o Paciente com Id: " + attendance.getPatientId()
-                    + " não existem. " + Attendance.class.getName());
-        }
 
         if (patient == null) {
-            throw new DataIntegrityException("Não é possível criar um atendimento porque o Paciente com Id: "
-                    + attendance.getPatientId() + " naõ existe. " + Attendance.class.getName());
+            throw new DataIntegrityException("Não é possível criar uma atendimento porque o Paciente com Id: " + attendance.getPatientId()
+                    + " não existe. " + Attendance.class.getName());
         }
 
-        if (doctor == null) {
-            throw new DataIntegrityException("Não é possível criar um atendimento porque o Médico com Id: "
-                    + attendance.getDoctorId() + " não existe. " + Attendance.class.getName());
+        Login login = loginService.getAuthenticated();
+
+        if (!login.hasRole(AuthorityName.DOCTOR)) {
+            throw new AccessDeniedException("Somente Médicos logados podem salvar um atendimento.");
         } else {
             attendance.setId(null);
-            attendance.setInstant(new Date());
+            attendance.setInstant(attendance.getInstant());
+            attendance.setDoctorId(login.getId());
             attendance.setPatientId(attendance.getPatientId());
 
             System.err.println("Atendimento Id: " + attendance.getId() + "\tPaciente: " + patient);

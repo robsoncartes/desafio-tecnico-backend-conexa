@@ -30,7 +30,5 @@ public class Attendance {
     @NotNull(message = "Id do Paciente não pode ser nulo.")
     private Long patientId;
 
-    @NotNull(message = "Id do Médico não pode ser nulo.")
     private Long doctorId;
-
 }
