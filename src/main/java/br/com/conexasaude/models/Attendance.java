@@ -23,7 +23,7 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull(message = "Data e hora do Atendimento não deve ser nulo.")
     private Date instant;
 

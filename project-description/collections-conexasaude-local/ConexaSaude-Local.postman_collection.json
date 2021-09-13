@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "48b9329f-b0fc-40f8-8f6c-a5c4aa000386",
+		"name": "ConexaSaude-Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "GET /api/v1/patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28yQGVtYWlsLmNvbSIsImV4cCI6MTYzMTQwOTQ2Nn0.8DbBP4K3ST6OEeircseo1v0D_m7Y2Tr96K79xOeic9ahhXmPgQf3Dzhlj4QNj1_bvX67JrZ5LXeYH-q81WkE5A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /api/v1/patients/id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTM0MzYyNn0.PMjcmZJ5qYS2wNQT5-_GhwpGszBLt8Sl3zejzNaJczsJWTpwBhWxfOPHPbHLUF6tdmZ8U-wvQIVbTSOWs_kjlw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Novoaaa\",\r\n    \"cpf\": \"744.197.940-46\",\r\n    \"age\": \"15\",\r\n    \"email\": \"patient3@email.com\",\r\n    \"phoneNumber\": \"(21) 3232-6564\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/patients/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /patients/id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28yQGVtYWlsLmNvbSIsImV4cCI6MTYzMTQwOTQ2Nn0.8DbBP4K3ST6OEeircseo1v0D_m7Y2Tr96K79xOeic9ahhXmPgQf3Dzhlj4QNj1_bvX67JrZ5LXeYH-q81WkE5A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/patients/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/patients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTQ4ODg3Mn0.bTRiJLwItG4-uFR2wCiqdleVg9x1K8Wrqh6Gx5ABy9xhmiYvXpTH7lMOHXQrHavO8BBIo_JmfHOI2DQ6yjw1Qw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rafael Braga\",\r\n    \"cpf\": \"415.233.250-62\",\r\n    \"age\": \"13\",\r\n    \"email\": \"patient4@email.com\",\r\n    \"phoneNumber\": \"(21) 3232-6565\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/v1/patients/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTM0MzYyNn0.PMjcmZJ5qYS2wNQT5-_GhwpGszBLt8Sl3zejzNaJczsJWTpwBhWxfOPHPbHLUF6tdmZ8U-wvQIVbTSOWs_kjlw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/patients/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "GET /api/v1/doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28zQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2NzkxMX0.gzqywBuO0Q12VYALV9PJyNhJjbaXnpLfSJBjSV3jdPDuKsUjzEKySksrV7cq2WcF9R1F2Zrk1Ku_kEMJrzdirA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/doctors",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"medico3@email.com\",\r\n    \"password\": \"pass\",\r\n    \"passwordConfirmation\": \"pass\",\r\n    \"expertise\": \"Cardiologista\",\r\n    \"cpf\": \"572.279.810-02\",\r\n    \"age\": \"111\",\r\n    \"phoneNumber\": \"(21) 3232-6565\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/v1/doctors/id",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28zQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2NzkxMX0.gzqywBuO0Q12VYALV9PJyNhJjbaXnpLfSJBjSV3jdPDuKsUjzEKySksrV7cq2WcF9R1F2Zrk1Ku_kEMJrzdirA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/doctors/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"doctors",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"medico@email.com\",\r\n  \"password\": \"pass\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST api/v1/logoff",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28zQGVtYWlsLmNvbSIsImV4cCI6MTYzMTExMjk3NH0.xK-WocHJCQehNXGDf6pQKoErJaXC7qEwzHA1scltle4oBLhKdOkfkQ9khKopbA6EEDmcPoxkRvKvCSzzvWrQlQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/logoff",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"logoff"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "GET  /api/v1/attendances",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28yQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU1NDYxMn0.F6S52OriA8kaazLvYeZCHA7japwKSefA6f4H1eYzAIbOVZn5AX2p_FIY9P4WZrc64m5ixWPW9Sia8bdzgdsYsA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Location",
+								"value": "location",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/attendances/",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  /api/v1/attendances/id",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28yQGVtYWlsLmNvbSIsImV4cCI6MTYzMTUxNDkwNH0.Y9RUQhV4dSt_cpO2expY4IlfSGKnL-fsbk5idmQpQwhur_7orEmRcmvJTp8q5aQ0hbVplb7kdDrFagFMv3mS9A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/attendances/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/attendances",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2ODkyOX0.RLL8DJtborFFuQhSDXiIVsqw_3gfoIByHu1zzobZSFwTy-PvM1RaaTLxC6RYo6UfuQ7ZjkhOru9XawXo3lr3dg",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"instant\": \"2021/09/12 23:11\",\r\n  \"patientId\": \"3\",\r\n  \"diagnostics\": [\r\n    {\r\n      \"description\": \"Descrição Doença 1\",\r\n      \"details\": \"Detalhes do descrição da doença\"\r\n    },\r\n\r\n    {\r\n      \"description\": \"Descrição Doença 2\",\r\n      \"details\": \"Detalhes da Descrição da doença\"\r\n    }\r\n\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/api/v1/attendances",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"attendances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/v1/attendances/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28yQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2OTQ2NX0.pjxbRFa-Kl6BgqRD6Q6-vGZIwwZrrFRp_6HFx7YwVBGnlRnXrP6_7WI0USHocOcE8RvpLrKenP-G3E0rXi3zbA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8082/api/v1/attendances/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Docs",
+			"item": [
+				{
+					"name": "GET /api/v1/swagger-ui.html",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTMyMTM3MH0.lEPvoC73TIobbAcnZAQ2Lg-zXFwrOpUxCesl14gmycUrz2sCJYS3jitXW06KwGi8bqLYeZwjre3BHQcB1mptdw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/swagger-ui.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"swagger-ui.html"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

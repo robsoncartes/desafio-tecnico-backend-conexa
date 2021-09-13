@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "f4c0fcf8-88d5-4fd8-9ebf-42925c528480",
+		"name": "ConexaSaude-Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "GET /api/v1/doctors",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDE3NH0.DPjZPrDbCmG3cLuTFXDjhV0pJFsecqXFjmia0Te-LaBuW50fT0mUUSE4dcIa6y1QBONWdf5AQKlb751dJsE-YQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/doctors",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTMzODE1Nn0.PrDu2-Wrfe_HlZSEz1N993d8lHwx1JQvfy8rQuDTw1R4Bgr2uUxvbr3JLdTeT-p03GVneIoovdwyR3AZsom5dw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"medico3@email.com\",\r\n    \"password\": \"pass\",\r\n    \"passwordConfirmation\": \"pass\",\r\n    \"expertise\": \"Cardiologista\",\r\n    \"cpf\": \"847.909.740-06\",\r\n    \"age\": \"21\",\r\n    \"phoneNumber\": \"(21) 3232-6565\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/signup",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/v1/doctors/id",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDE3NH0.DPjZPrDbCmG3cLuTFXDjhV0pJFsecqXFjmia0Te-LaBuW50fT0mUUSE4dcIa6y1QBONWdf5AQKlb751dJsE-YQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/doctors/1",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"medico1@email.com\",\r\n  \"password\": \"pass\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/login",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST api/v1/logoff",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDIzN30.eJUR5tebg8HFhNli6DODZCmQD-idVa5Wiq8-pYuAFGULJQ84ctx7O98ZqijemfhRnc3GKHTQpDVbSc2L6rj9kQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/ogoff",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ogoff"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "GET /api/v1/patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDI5NH0.ZSgR7de9aPFhkuUsK714EqDji7owvxH-J1qPnLw4rRQ2xnO8gvtWlVYTmTBYMDTT-ws-lFYknbR6UiDeaRJl0A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/patients",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /api/v1/patients/id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDM4Nn0.LZFs2b_5IxEoWjrB3JPG1C-R68q74jgMjE5BG2KIuJrWGi6EL-p0pNhmAGOoMF1Fipk35RXIEKrsyNOo86VJbw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Novoaaa\",\r\n    \"cpf\": \"686.309.940-37\",\r\n    \"age\": \"15\",\r\n    \"email\": \"patient3@email.com\",\r\n    \"phoneNumber\": \"(21) 3232-6564\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/patients/3",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /patients/id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDM4Nn0.LZFs2b_5IxEoWjrB3JPG1C-R68q74jgMjE5BG2KIuJrWGi6EL-p0pNhmAGOoMF1Fipk35RXIEKrsyNOo86VJbw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/patients/3",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/patients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2OTk0Mn0.fhmp-OJDvKvcNVRbHnQYkhqLxEbVBrijjiZlg88aHoQlmeN5kOmPDPnQZP021MzkUr6a6qqpWI3hw99RtjxikQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rafael Braga\",\r\n    \"cpf\": \"764.574.450-20\",\r\n    \"age\": \"13\",\r\n    \"email\": \"patient5@email.com\",\r\n    \"phoneNumber\": \"(21) 3232-6565\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/patients",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/v1/patients/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU2OTk0Mn0.fhmp-OJDvKvcNVRbHnQYkhqLxEbVBrijjiZlg88aHoQlmeN5kOmPDPnQZP021MzkUr6a6qqpWI3hw99RtjxikQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/patients/3",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "GET  /api/v1/attendances",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28zQGVtYWlsLmNvbSIsImV4cCI6MTYzMTIwNTQwN30.QjUK6wSceK1YnrEXJ9D5HT2-STUsJbvrd0ax6M0VN4EFCoz9k9RPEwgadF4Yp76YUmXElF0E--Xl5KREE_Q0Ew",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/attendances/",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  /api/v1/attendances/id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDcwMX0.-wAZ3KXoGhYkUiNsxZppRDgtOZsHAYPAYSAgMgSx0mFyupAsjHrUNfiwldGQYc3wfm1NoQ41KJxLz5Sdp3JtEQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/attendances/3",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/v1/attendances",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDE0M30.4tAnszopd8XRCheZRBEI8dMf34fnRjHmqa_ntODgssQPp4qcHv7bFJvJwSwYTvYkiASImXqpskm9AU0liitaBg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"instant\": \"14/08/2021 20:45\",\r\n  \"patientId\": \"2\",\r\n  \"doctorId\": \"2\",\r\n  \"diagnostics\": [\r\n    {\r\n      \"description\": \"Descrição Problema de Saúde 1\",\r\n      \"details\": \"Detalhes do atendimentoe descrição 1\"\r\n    },\r\n\r\n    {\r\n      \"description\": \"Descrição do Problema de Saúde 2\",\r\n      \"details\": \"Detalhes do atendimento e descrição 2\"\r\n    }\r\n\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/attendances",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attendances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/v1/attendances/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZWRpY28xQGVtYWlsLmNvbSIsImV4cCI6MTYzMTU3MDYzM30.rdX_ynjvPSOY9sq8O4WJgH_c93v9bIFuy-jM_c6rXh97IH9AOrmgvqVTqX89Sm1-JJHYSy3vARaToVPlF-oxgQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://back-end-desafio-conexa.herokuapp.com/api/v1/attendances/1",
+							"protocol": "https",
+							"host": [
+								"back-end-desafio-conexa",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attendances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
