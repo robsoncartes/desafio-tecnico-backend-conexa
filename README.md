@@ -1,5 +1,7 @@
 # Desafio Técnico backend Conexa
 
+Veja [project-description](https://gitlab.com/robsonsousa/desafio-tecnico-backend-conexa/project-description/README.md) para obter as descrições de como executar o projeto.
+
 Construir uma API REST para que nossos médicos de plantão consigam se logar na plataforma, consigam manter pacientes e agendar atendimentos com os pacientes cadastrados.
 
 ## Autenticação
