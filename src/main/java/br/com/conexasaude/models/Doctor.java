@@ -93,7 +93,6 @@ public class Doctor {
         return this.authorities.stream().map(AuthorityName::toEnum).collect(Collectors.toSet());
     }
 
-
     @Override
     public String toString() {
 

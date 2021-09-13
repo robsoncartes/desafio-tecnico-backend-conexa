@@ -4,7 +4,6 @@ import br.com.conexasaude.models.Attendance;
 import br.com.conexasaude.models.Patient;
 import br.com.conexasaude.models.enums.AuthorityName;
 import br.com.conexasaude.repositories.AttendanceRepository;
-import br.com.conexasaude.repositories.DoctorRepository;
 import br.com.conexasaude.repositories.PatientRepository;
 import br.com.conexasaude.security.Login;
 import br.com.conexasaude.services.AttendanceService;
@@ -30,9 +29,6 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private PatientRepository patientRepository;
-
-    @Autowired
-    private DoctorRepository doctorRepository;
 
     @Autowired
     private LoginService loginService;
@@ -105,7 +101,6 @@ public class AttendanceServiceImpl implements AttendanceService {
                 System.err.println(attendance);
 
                 return attendanceRepository.save(attendance);
-
             }
         }
     }

@@ -23,8 +23,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final JWTUtil jwtUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-        // method setAuth.. UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter
-        setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler()); //
+        setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
 
@@ -45,7 +44,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
-        // super.successfulAuthentication(request, response, chain, authResult);
 
         String email = ((Login) authResult.getPrincipal()).getUsername();
         String token = jwtUtil.generateToken(email);

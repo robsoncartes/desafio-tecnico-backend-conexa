@@ -5,7 +5,7 @@ import br.com.conexasaude.models.enums.AuthorityName;
 
 public class DoctorFactory {
 
-    public static Doctor validDoctor(Doctor doctor){
+    public static Doctor validDoctor(Doctor doctor) {
 
         doctor.setEmail("medico1@email.com");
         doctor.setPassword("pass");

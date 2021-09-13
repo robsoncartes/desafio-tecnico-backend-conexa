@@ -28,6 +28,7 @@ public class AttendanceController {
         return ResponseEntity.ok().body(attendance);
     }
 
+    @PreAuthorize("hasRole('DOCTOR')")
     @GetMapping(value = "/attendances")
     public ResponseEntity<List<Attendance>> findAll() {
 
@@ -47,7 +48,7 @@ public class AttendanceController {
         return ResponseEntity.created(uri).build();
     }
 
-    // @PreAuthorize("hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('DOCTOR')")
     @DeleteMapping(value = "/attendances/{id}")
     public ResponseEntity<Void> delete (@PathVariable Long id){
 

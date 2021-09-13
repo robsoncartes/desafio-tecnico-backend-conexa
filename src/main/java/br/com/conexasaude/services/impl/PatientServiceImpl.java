@@ -93,7 +93,6 @@ public class PatientServiceImpl implements PatientService {
         Long uriId = Long.parseLong(map.get("id"));
         System.err.println(uriId);
 
-        // Patient newPatient = patientRepository.findByEmail(patient.getEmail());
         Patient newPatient = getByEmail(patient.getEmail());
         System.err.println(newPatient);
 
@@ -111,13 +110,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(Long id) {
 
         getById(id);
 
         try {
             patientRepository.deleteById(id);
-        }catch (DataIntegrityViolationException  e){
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir um Paciente com Agendamentos.");
         }
     }

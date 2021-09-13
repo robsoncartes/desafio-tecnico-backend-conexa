@@ -62,18 +62,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable();
 
-        /*
-        http.authorizeRequests()
-                .antMatchers(
-                        "/v2/api-docs",
-                        "/swagger-resources/**",
-                        "/swagger-ui.html",
-                        "/webjars/**" ,
-                        "/swagger.json")
-                .permitAll();
-
-         */
-
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers(PUBLIC_MATCHERS_GET).permitAll()
@@ -88,7 +76,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        // auth.userDetailsService(loginDetailsService).passwordEncoder(getBCryptPasswordEncoder());
         auth.userDetailsService(userDetailsService).passwordEncoder(getBCryptPasswordEncoder());
     }
 
