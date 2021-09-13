@@ -17,6 +17,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,15 +89,24 @@ public class AttendanceServiceImpl implements AttendanceService {
         if (!login.hasRole(AuthorityName.DOCTOR)) {
             throw new AccessDeniedException("Somente Médicos logados podem salvar um atendimento.");
         } else {
-            attendance.setId(null);
-            attendance.setInstant(attendance.getInstant());
-            attendance.setDoctorId(login.getId());
-            attendance.setPatientId(attendance.getPatientId());
 
-            System.err.println("Atendimento Id: " + attendance.getId() + "\tPaciente: " + patient);
-            System.err.println(attendance);
+            if (attendance.getInstant().before(Date.from(Instant.now()))) {
+                System.err.println(attendance.getInstant());
+                System.err.println(Date.from(Instant.now()));
+                throw new DataIntegrityException("Não é possível criar um agendamento com a data anterior a data atual.");
+            } else {
 
-            return attendanceRepository.save(attendance);
+                attendance.setId(null);
+                attendance.setInstant(attendance.getInstant());
+                attendance.setDoctorId(login.getId());
+                attendance.setPatientId(attendance.getPatientId());
+
+                System.err.println("Hora agora: " + Date.from(Instant.now()));
+                System.err.println(attendance);
+
+                return attendanceRepository.save(attendance);
+
+            }
         }
     }
 
