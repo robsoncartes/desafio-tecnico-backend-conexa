@@ -12,16 +12,16 @@ public enum Autorizacao {
     private int codigo;
     private String descricao;
 
-    public static Autorizacao toEnum(Integer code) {
+    public static Autorizacao toEnum(Integer codigo) {
 
-        if (code == null)
+        if (codigo == null)
             return null;
 
         for (Autorizacao autorizacao : Autorizacao.values()) {
-            if (code.equals(autorizacao.getDescricao()))
+            if (codigo.equals(autorizacao.getCodigo()))
                 return autorizacao;
         }
 
-        throw new IllegalArgumentException("Id " + code + " inválido.");
+        throw new IllegalArgumentException("Id " + codigo + " inválido.");
     }
 }
