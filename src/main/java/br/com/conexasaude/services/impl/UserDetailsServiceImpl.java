@@ -1,7 +1,7 @@
 package br.com.conexasaude.services.impl;
 
-import br.com.conexasaude.models.Doctor;
-import br.com.conexasaude.repositories.DoctorRepository;
+import br.com.conexasaude.models.Medico;
+import br.com.conexasaude.repositories.MedicoRepository;
 import br.com.conexasaude.security.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private MedicoRepository doctorRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Doctor doctor = doctorRepository.findByEmail(email);
+        Medico doctor = doctorRepository.findByEmail(email);
 
         if (doctor == null)
             throw new UsernameNotFoundException(email);
 
-        return new Login(doctor.getId(), doctor.getEmail(), doctor.getPassword(), doctor.getAuthorityNames());
+        return new Login(doctor.getId(), doctor.getEmail(), doctor.getSenha(), doctor.getAutorizacoes());
     }
 }

@@ -1,11 +1,11 @@
 package br.com.conexasaude.controllers;
 
-import br.com.conexasaude.models.Doctor;
-import br.com.conexasaude.models.views.DoctorView;
+import br.com.conexasaude.models.Medico;
+import br.com.conexasaude.models.views.MedicoVisao;
 import br.com.conexasaude.security.JWTUtil;
 import br.com.conexasaude.security.Login;
-import br.com.conexasaude.services.DoctorService;
 import br.com.conexasaude.services.LoginService;
+import br.com.conexasaude.services.MedicoService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -24,57 +24,55 @@ import java.util.List;
 @RestController
 @RequestMapping
 @AllArgsConstructor
-public class DoctorController {
+public class MedicoController {
 
     private JWTUtil jwtUtil;
     private LoginService loginService;
-    private DoctorService doctorService;
+    private MedicoService medicoService;
 
-    @PreAuthorize("hasRole('DOCTOR')")
-    @GetMapping(value = "/doctors/{id}")
-    @JsonView(DoctorView.DoctorComplete.class)
-    @ApiOperation(value = "Obtenha um médico com base em seu ID", response = Doctor.class)
+
+    @ApiOperation(value = "Obtenha um médico com base em seu ID", response = Medico.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Médico recuperado com sucesso."),
             @ApiResponse(code = 401, message = "Não autorizado."),
             @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
             @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
             @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")})
-    public ResponseEntity<Doctor> findById(@PathVariable Long id) {
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
+    @GetMapping(value = "/doctors/{id}")
+    @JsonView(MedicoVisao.MedicoCompleto.class)
+    public ResponseEntity<Medico> findById(@PathVariable Long id) {
 
-        Doctor doctor = doctorService.getById(id);
+        Medico medico = medicoService.getById(id);
 
-        return ResponseEntity.ok().body(doctor);
+        return ResponseEntity.ok().body(medico);
     }
 
-    @ApiOperation(value = "Salvar um novo médico no banco de dados", response = Doctor.class)
+    @ApiOperation(value = "Salvar um novo médico no banco de dados", response = Medico.class)
     @ApiResponses(value = {@ApiResponse(code = 201, message = "Recurso criado com sucesso. Médico salvo no banco de dados."),
             @ApiResponse(code = 400, message = "Pedido ruim. O servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro."),
             @ApiResponse(code = 401, message = "Não autorizado."),
             @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
             @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
             @ApiResponse(code = 422, message = "Entidade não processável."),
-            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
-    })
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")})
     @PostMapping(value = "/signup")
-    public ResponseEntity<Void> save(@Valid @RequestBody Doctor doctor) {
+    public ResponseEntity<Void> save(@Valid @RequestBody Medico medico) {
 
-        Doctor obj = doctorService.save(doctor);
-
+        Medico obj = medicoService.save(medico);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        System.err.println(uri);
+
         return ResponseEntity.created(uri).build();
     }
 
-    @PreAuthorize("hasRole('DOCTOR')")
-    @PostMapping(value = "/logoff")
     @ApiResponses(value = {@ApiResponse(code = 201, message = "Recurso criado com sucesso. Médico salvo no banco de dados."),
             @ApiResponse(code = 400, message = "Pedido ruim. O servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro."),
             @ApiResponse(code = 401, message = "Não autorizado."),
             @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
             @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
             @ApiResponse(code = 422, message = "Entidade não processável."),
-            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
-    })
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")})
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
+    @PostMapping(value = "/logoff")
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
 
         Login login = loginService.getAuthenticated();
@@ -86,20 +84,19 @@ public class DoctorController {
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
-    @GetMapping(value = "/doctors")
-    @JsonView(DoctorView.DoctorComplete.class)
-    @ApiOperation(value = "Consultar todos os médicos armazenados no banco de dados.", response = Doctor.class)
+    @ApiOperation(value = "Consultar todos os médicos armazenados no banco de dados.", response = Medico.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Lista de médicos recuperada com sucesso."),
             @ApiResponse(code = 401, message = "Não autorizado."),
             @ApiResponse(code = 403, message = "Proibido. Você não tem permissão para acessar esse recurso."),
             @ApiResponse(code = 404, message = "O recurso não foi encontrado."),
-            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")
-    })
-    public ResponseEntity<List<Doctor>> findAll() {
+            @ApiResponse(code = 500, message = "O servidor encontrou uma condição inesperada e que o impediu de atender à solicitação.")})
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
+    @GetMapping(value = "/doctors")
+    @JsonView(MedicoVisao.MedicoCompleto.class)
+    public ResponseEntity<List<Medico>> findAll() {
 
-        List<Doctor> doctors = doctorService.getAll();
+        List<Medico> medicos = medicoService.getAll();
 
-        return ResponseEntity.ok(doctors);
+        return ResponseEntity.ok(medicos);
     }
 }

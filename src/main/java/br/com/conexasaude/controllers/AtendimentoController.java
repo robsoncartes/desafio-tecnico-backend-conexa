@@ -1,7 +1,7 @@
 package br.com.conexasaude.controllers;
 
-import br.com.conexasaude.models.Attendance;
-import br.com.conexasaude.services.AttendanceService;
+import br.com.conexasaude.models.Atendimento;
+import br.com.conexasaude.services.AtendimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,45 +14,44 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-public class AttendanceController {
+public class AtendimentoController {
 
     @Autowired
-    private AttendanceService attendanceService;
+    private AtendimentoService atendimentoService;
 
-    @PreAuthorize("hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
     @GetMapping(value = "attendances/{id}")
-    public ResponseEntity<Attendance> findById(@PathVariable Long id) {
+    public ResponseEntity<Atendimento> findById(@PathVariable Long id) {
 
-        Attendance attendance = attendanceService.getById(id);
+        Atendimento attendance = atendimentoService.getById(id);
 
         return ResponseEntity.ok().body(attendance);
     }
 
-    @PreAuthorize("hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
     @GetMapping(value = "/attendances")
-    public ResponseEntity<List<Attendance>> findAll() {
+    public ResponseEntity<List<Atendimento>> findAll() {
 
-        List<Attendance> attendances = attendanceService.getAll();
+        List<Atendimento> attendances = atendimentoService.getAll();
 
         return ResponseEntity.ok().body(attendances);
     }
 
-    @PreAuthorize("hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
     @PostMapping(value = "/attendances")
-    public ResponseEntity<Void> save(@Valid @RequestBody Attendance attendance) {
+    public ResponseEntity<Void> save(@Valid @RequestBody Atendimento atendimento) {
 
-        Attendance obj = attendanceService.save(attendance);
-
+        Atendimento obj = atendimentoService.save(atendimento);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
 
-    @PreAuthorize("hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_MEDICO')")
     @DeleteMapping(value = "/attendances/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
-        attendanceService.delete(id);
+        atendimentoService.delete(id);
 
         return ResponseEntity.noContent().build();
     }

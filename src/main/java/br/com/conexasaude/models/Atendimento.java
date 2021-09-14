@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "attendances")
+@Table(name = "atendimentos")
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Attendance {
+public class Atendimento {
 
     private static long serialVersionUID = 1L;
 
@@ -25,10 +25,10 @@ public class Attendance {
 
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull(message = "Data e hora do Atendimento não deve ser nulo.")
-    private Date instant;
+    private Date dataHora;
 
     @NotNull(message = "Id do Paciente não pode ser nulo.")
-    private Long patientId;
+    private Long idPaciente;
 
-    private Long doctorId;
+    private Long idMedico;
 }

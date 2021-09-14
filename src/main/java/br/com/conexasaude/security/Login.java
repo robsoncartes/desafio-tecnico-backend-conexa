@@ -1,6 +1,6 @@
 package br.com.conexasaude.security;
 
-import br.com.conexasaude.models.enums.AuthorityName;
+import br.com.conexasaude.models.enums.Autorizacao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,19 +21,19 @@ public class Login implements UserDetails {
     private String email;
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> autorizacoes;
 
-    public Login(Long id, String email, String password, Set<AuthorityName> authorityNames) {
+    public Login(Long id, String email, String password, Set<Autorizacao> autorizacoes) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.authorities = authorityNames.stream().map(authorityName ->
-                new SimpleGrantedAuthority(authorityName.getDescription())).collect(Collectors.toSet());
+        this.autorizacoes = autorizacoes.stream().map(autorizacao ->
+                new SimpleGrantedAuthority(autorizacao.getDescricao())).collect(Collectors.toSet());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return this.autorizacoes;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class Login implements UserDetails {
         return true;
     }
 
-    public boolean hasRole(AuthorityName authorityName) {
+    public boolean hasRole(Autorizacao autorizacao) {
 
-        return this.getAuthorities().contains(new SimpleGrantedAuthority(authorityName.getDescription()));
+        return this.getAuthorities().contains(new SimpleGrantedAuthority(autorizacao.getDescricao()));
     }
 }

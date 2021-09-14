@@ -1,6 +1,6 @@
 package br.com.conexasaude.security;
 
-import br.com.conexasaude.models.Doctor;
+import br.com.conexasaude.models.Medico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,8 +33,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         try {
-            Doctor account = new ObjectMapper().readValue(request.getInputStream(), Doctor.class);
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(account.getEmail(), account.getPassword(), new ArrayList<>());
+            Medico medico = new ObjectMapper().readValue(request.getInputStream(), Medico.class);
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(medico.getEmail(), medico.getSenha(), new ArrayList<>());
 
             return authenticationManager.authenticate(authToken);
         } catch (IOException e) {
