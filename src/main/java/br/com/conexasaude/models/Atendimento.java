@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "atendimentos")
@@ -31,4 +33,7 @@ public class Atendimento {
     private Long idPaciente;
 
     private Long idMedico;
+
+    @OneToMany(mappedBy = "atendimento")
+    private List<Sintoma> sintomas = new ArrayList<>();
 }

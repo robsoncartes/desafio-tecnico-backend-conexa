@@ -2,9 +2,11 @@ package br.com.conexasaude.services.impl;
 
 import br.com.conexasaude.models.Atendimento;
 import br.com.conexasaude.models.Paciente;
+import br.com.conexasaude.models.Sintoma;
 import br.com.conexasaude.models.enums.Autorizacao;
 import br.com.conexasaude.repositories.AtendimentoRepository;
 import br.com.conexasaude.repositories.PacienteRepository;
+import br.com.conexasaude.repositories.SintomaRepository;
 import br.com.conexasaude.security.Login;
 import br.com.conexasaude.services.AtendimentoService;
 import br.com.conexasaude.services.LoginService;
@@ -32,6 +34,9 @@ public class AtendimentoServiceImpl implements AtendimentoService {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private SintomaRepository sintomaRepository;
 
     @Override
     public Atendimento getById(Long id) {
@@ -94,6 +99,19 @@ public class AtendimentoServiceImpl implements AtendimentoService {
                 atendimento.setDataHora(atendimento.getDataHora());
                 atendimento.setIdMedico(login.getId());
                 atendimento.setIdPaciente(atendimento.getIdPaciente());
+
+                List<Sintoma> sintomas = atendimento.getSintomas();
+
+                for (Sintoma sintoma : sintomas) {
+                    sintoma.setId(null);
+                    sintoma.setDescricao(sintoma.getDescricao());
+                    sintoma.setDetalhes(sintoma.getDetalhes());
+                    sintoma.setAtendimento(atendimento);
+
+                    sintomaRepository.save(sintoma);
+                }
+
+                // sintomaRepository.saveAll(sintomas);
 
                 return atendimentoRepository.save(atendimento);
             }

@@ -63,9 +63,9 @@ public class Medico {
     private String telefone;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "authority_names")
+    @CollectionTable(name = "autorizacoes")
     @JsonView(MedicoVisao.MedicoLogin.class)
-    private Set<Integer> authorities = new HashSet<>();
+    private Set<Integer> autorizacoes = new HashSet<>();
 
     public Medico() {
         this.addAutorizacao(Autorizacao.MEDICO);
@@ -84,13 +84,13 @@ public class Medico {
     }
 
     public void addAutorizacao(Autorizacao autorizacao) {
-        this.authorities.add(autorizacao.getCodigo());
+        this.autorizacoes.add(autorizacao.getCodigo());
     }
 
     @JsonView(MedicoVisao.MedicoCompleto.class)
     public Set<Autorizacao> getAutorizacoes() {
 
-        return this.authorities.stream().map(Autorizacao::toEnum).collect(Collectors.toSet());
+        return this.autorizacoes.stream().map(Autorizacao::toEnum).collect(Collectors.toSet());
     }
 
     @Override
