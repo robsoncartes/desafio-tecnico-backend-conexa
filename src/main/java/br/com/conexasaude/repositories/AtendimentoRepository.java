@@ -20,5 +20,5 @@ public interface AtendimentoRepository extends CrudRepository<Atendimento, Long>
 
     List<Atendimento> findByIdPaciente(Long idPaciente);
 
-    List<Atendimento> findAll();
+    List<Atendimento> findAllByIdMedico(Long idMedico);
 }

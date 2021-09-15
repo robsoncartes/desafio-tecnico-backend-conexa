@@ -32,7 +32,7 @@ public class AtendimentoController {
     @GetMapping(value = "/attendances")
     public ResponseEntity<List<Atendimento>> findAll() {
 
-        List<Atendimento> attendances = atendimentoService.getAll();
+        List<Atendimento> attendances = atendimentoService.getAllByMedico();
 
         return ResponseEntity.ok().body(attendances);
     }

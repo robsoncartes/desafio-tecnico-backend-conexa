@@ -16,5 +16,5 @@ public interface AtendimentoService {
 
     void delete(Long id);
 
-    List<Atendimento> getAll();
+    List<Atendimento> getAllByMedico();
 }

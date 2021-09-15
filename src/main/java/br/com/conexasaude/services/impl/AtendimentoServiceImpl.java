@@ -111,8 +111,6 @@ public class AtendimentoServiceImpl implements AtendimentoService {
                     sintomaRepository.save(sintoma);
                 }
 
-                // sintomaRepository.saveAll(sintomas);
-
                 return atendimentoRepository.save(atendimento);
             }
         }
@@ -127,7 +125,10 @@ public class AtendimentoServiceImpl implements AtendimentoService {
     }
 
     @Override
-    public List<Atendimento> getAll() {
-        return atendimentoRepository.findAll();
+    public List<Atendimento> getAllByMedico() {
+
+        Login login = loginService.getAuthenticated();
+
+        return atendimentoRepository.findAllByIdMedico(login.getId());
     }
 }
