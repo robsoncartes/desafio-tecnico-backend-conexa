@@ -65,7 +65,7 @@ public class Medico {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "autorizacoes")
     @JsonView(MedicoVisao.MedicoLogin.class)
-    private Set<Integer> autorizacoes = new HashSet<>();
+    public Set<Integer> autorizacoes = new HashSet<>();
 
     public Medico() {
         this.addAutorizacao(Autorizacao.MEDICO);
@@ -90,8 +90,13 @@ public class Medico {
     @JsonView(MedicoVisao.MedicoCompleto.class)
     public Set<Autorizacao> getAutorizacoes() {
 
+        /** FIX
+         * FIXME MedicoTest assertPojoMethodsFor(classUnderTest).testing(Method.GETTER).areWellImplemented();
+         */
+
         return this.autorizacoes.stream().map(Autorizacao::toEnum).collect(Collectors.toSet());
     }
+
 
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ public enum Autorizacao {
 
     MEDICO(1, "ROLE_MEDICO");
 
-    private int codigo;
+    public int codigo;
     private String descricao;
 
     public static Autorizacao toEnum(Integer codigo) {
