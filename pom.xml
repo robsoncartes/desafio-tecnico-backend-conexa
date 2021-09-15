@@ -37,7 +37,7 @@
         <org.springframework.version>5.0.9.RELEASE</org.springframework.version>
         <org.springframework.data.version>2.0.5.RELEASE</org.springframework.data.version>
         <org.hibernate.version>5.2.15.Final</org.hibernate.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.26</mysql.version>
         <java.version>1.8</java.version>
         <swagger.version>2.7.0</swagger.version>
         <maven.compiler.source>8</maven.compiler.source>

@@ -1,16 +1,16 @@
 package factories;
 
+
 import br.com.conexasaude.models.Atendimento;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class AtendimentoFactory {
 
     public static Atendimento atendimentoValido(Atendimento atendimento) {
-
         atendimento.setIdPaciente(1L);
         atendimento.setIdMedico(1L);
-        atendimento.setDataHora(new Date());
+        atendimento.setDataHora(LocalDateTime.now());
 
         return atendimento;
     }

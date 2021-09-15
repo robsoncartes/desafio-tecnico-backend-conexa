@@ -5,8 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,7 +27,7 @@ public class Atendimento {
 
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
     @NotNull(message = "Data e hora do Atendimento não deve ser nulo.")
-    private Date dataHora;
+    private LocalDateTime dataHora;
 
     @NotNull(message = "Id do Paciente não pode ser nulo.")
     private Long idPaciente;

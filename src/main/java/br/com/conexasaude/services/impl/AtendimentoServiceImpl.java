@@ -18,8 +18,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,10 +90,9 @@ public class AtendimentoServiceImpl implements AtendimentoService {
             throw new AccessDeniedException("Somente Médicos logados podem salvar um atendimento.");
         } else {
 
-            if (atendimento.getDataHora().before(Date.from(Instant.now()))) {
+            if (atendimento.getDataHora().isBefore(LocalDateTime.now())) {
                 throw new DataIntegrityException("Não é possível criar um agendamento com a data anterior a data atual.");
             } else {
-
                 atendimento.setId(null);
                 atendimento.setDataHora(atendimento.getDataHora());
                 atendimento.setIdMedico(login.getId());
